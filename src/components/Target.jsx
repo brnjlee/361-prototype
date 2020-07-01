@@ -54,12 +54,8 @@ const Target = () => {
   }, [pos]);
 
   const handleClick = position => {
-    console.log(position);
     let copy = boxes;
-    copy.splice(position, 1, {
-      position,
-      selected: !boxes[position].selected
-    });
+    copy.splice(position, 1, !!boxes[position] ? 0 : 1);
     setBox([...copy]);
   };
   const loop = boxes.map((box, i) => {
