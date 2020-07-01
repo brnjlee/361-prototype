@@ -1,26 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
-const Target = () => {
+const Target = ({ src, pos }) => {
+  const audio = useRef(null);
   const [boxes, setBox] = useState([
     0,
     0,
@@ -39,18 +20,12 @@ const Target = () => {
     0,
     0
   ]);
-  const [pos, setPos] = useState(0);
-
-  useInterval(() => {
-    if (pos >= 15) {
-      setPos(0);
-    } else {
-      setPos(pos + 1);
-    }
-  }, 500);
 
   useEffect(() => {
-    console.log(!!boxes[pos]);
+    if (!!boxes[pos]) {
+      audio.current.play();
+      audio.current.currentTime = 0;
+    }
   }, [pos]);
 
   const handleClick = position => {
@@ -69,7 +44,12 @@ const Target = () => {
       />
     );
   });
-  return <div className="target">{loop}</div>;
+  return (
+    <div className="target">
+      {loop}
+      <audio id={1} className="clip" src={src} ref={audio}></audio>
+    </div>
+  );
 };
 
 const TargetBox = ({ id, selected, handleClick, play }) => {
@@ -82,5 +62,13 @@ const TargetBox = ({ id, selected, handleClick, play }) => {
     ></div>
   );
 };
+
+const data = [
+  {
+    id: "snare",
+    letter: "Q",
+    src: "https://www.myinstants.com/media/sounds/snare.mp3"
+  }
+];
 
 export default Target;
