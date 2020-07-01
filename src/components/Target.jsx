@@ -63,12 +63,4 @@ const TargetBox = ({ id, selected, handleClick, play }) => {
   );
 };
 
-const data = [
-  {
-    id: "snare",
-    letter: "Q",
-    src: "https://www.myinstants.com/media/sounds/snare.mp3"
-  }
-];
-
 export default Target;

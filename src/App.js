@@ -33,7 +33,7 @@ function App() {
     } else {
       setPos(pos + 1);
     }
-  }, 500);
+  }, 300);
   return (
     <div className="App">
       <Target
