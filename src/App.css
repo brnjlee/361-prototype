@@ -6,7 +6,9 @@
 
 .target__box {
   height: 100px;
-  width: 100px;
+  max-width: 100px;
+  flex: 1;
+  min-width: 50px;
   margin: 20px;
   background: gray;
   border-radius: 20px;
