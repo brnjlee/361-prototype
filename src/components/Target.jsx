@@ -21,7 +21,24 @@ function useInterval(callback, delay) {
 }
 
 const Target = () => {
-  const [boxes, setBox] = useState([...initBoxes]);
+  const [boxes, setBox] = useState([
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]);
   const [pos, setPos] = useState(0);
 
   useInterval(() => {
@@ -33,7 +50,7 @@ const Target = () => {
   }, 500);
 
   useEffect(() => {
-    console.log(boxes[pos].selected);
+    console.log(!!boxes[pos]);
   }, [pos]);
 
   const handleClick = position => {
@@ -45,18 +62,18 @@ const Target = () => {
     });
     setBox([...copy]);
   };
-  const boxLoop = boxes.map(box => {
+  const loop = boxes.map((box, i) => {
     return (
       <TargetBox
-        key={box.position}
-        id={box.position}
+        key={i}
+        id={i}
         handleClick={position => handleClick(position)}
-        selected={box.selected}
-        play={pos === box.position}
+        selected={!!box}
+        play={pos === i}
       />
     );
   });
-  return <div className="target">{boxLoop}</div>;
+  return <div className="target">{loop}</div>;
 };
 
 const TargetBox = ({ id, selected, handleClick, play }) => {
@@ -69,71 +86,5 @@ const TargetBox = ({ id, selected, handleClick, play }) => {
     ></div>
   );
 };
-const initBoxes = [
-  {
-    position: 0,
-    selected: false
-  },
-  {
-    position: 1,
-    selected: false
-  },
-  {
-    position: 2,
-    selected: false
-  },
-  {
-    position: 3,
-    selected: false
-  },
-  {
-    position: 4,
-    selected: false
-  },
-  {
-    position: 5,
-    selected: false
-  },
-  {
-    position: 6,
-    selected: false
-  },
-  {
-    position: 7,
-    selected: false
-  },
-  {
-    position: 8,
-    selected: false
-  },
-  {
-    position: 9,
-    selected: false
-  },
-  {
-    position: 10,
-    selected: false
-  },
-  {
-    position: 11,
-    selected: false
-  },
-  {
-    position: 12,
-    selected: false
-  },
-  {
-    position: 13,
-    selected: false
-  },
-  {
-    position: 14,
-    selected: false
-  },
-  {
-    position: 15,
-    selected: false
-  }
-];
 
 export default Target;
