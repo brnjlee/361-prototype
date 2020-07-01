@@ -48,12 +48,7 @@ function App() {
         src={"http://www.masterbits.de/sc_docu/sounds1/1TM00013.MP3"}
         pos={pos}
       />
-      <Target
-        src={
-          "http://dight310.byu.edu/media/audio/FreeLoops.com/1/1/909%20Hi%20Hat%2005-5835-Free-Loops.com.mp3"
-        }
-        pos={pos}
-      />
+      <Target src="/assets/hihat.mp3" pos={pos} />
     </div>
   );
 }
