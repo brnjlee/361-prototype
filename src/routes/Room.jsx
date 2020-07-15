@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Target from "../components/Target";
 
+import "./Room.css";
+
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
@@ -33,19 +35,32 @@ export const Dashboard = () => {
   }, 300);
   return (
     <div className="room__container">
-      <Target
-        src={"https://www.myinstants.com/media/sounds/snare.mp3"}
-        pos={pos}
-      />
-      <Target
-        src={"https://www.myinstants.com/media/sounds/bass-drum.mp3"}
-        pos={pos}
-      />
-      <Target
-        src={"http://www.masterbits.de/sc_docu/sounds1/1TM00013.MP3"}
-        pos={pos}
-      />
-      <Target src="/assets/hihat.mp3" pos={pos} />
+      <div className="targets">
+        <Target
+          src={"https://www.myinstants.com/media/sounds/snare.mp3"}
+          pos={pos}
+          color={"#00B26A"}
+          title="Snare"
+        />
+        <Target
+          src={"https://www.myinstants.com/media/sounds/bass-drum.mp3"}
+          pos={pos}
+          color={"#9061A1"}
+          title="Bass"
+        />
+        <Target
+          src={"http://www.masterbits.de/sc_docu/sounds1/1TM00013.MP3"}
+          pos={pos}
+          color={"#FFCA45"}
+          title="Tom-tom"
+        />
+        <Target
+          color={"#EA5F50"}
+          src="/assets/hihat.mp3"
+          pos={pos}
+          title="Hihat"
+        />
+      </div>
     </div>
   );
 };

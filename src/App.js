@@ -9,7 +9,7 @@ import {
 import { Navbar } from "./components/Navbar";
 import { Landing } from "./routes/Landing";
 import { Create } from "./routes/Create";
-import { Dashboard } from "./routes/Dashboard";
+import { Dashboard } from "./routes/Room";
 
 import "./App.css";
 

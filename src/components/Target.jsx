@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Target = ({ src, pos }) => {
+const Target = ({ src, pos, color, title }) => {
   const audio = useRef(null);
   const [boxes, setBox] = useState([
     0,
@@ -41,20 +41,25 @@ const Target = ({ src, pos }) => {
         handleClick={position => handleClick(position)}
         selected={!!box}
         play={pos === i}
+        color={color}
       />
     );
   });
   return (
     <div className="target">
+      <div style={{ background: color }} className="target__title">
+        {title}
+      </div>
       {loop}
       <audio id={1} className="clip" src={src} ref={audio}></audio>
     </div>
   );
 };
 
-const TargetBox = ({ id, selected, handleClick, play }) => {
+const TargetBox = ({ id, selected, handleClick, play, color }) => {
   return (
     <div
+      style={{ background: selected ? color : null }}
       className={`target__box ${selected ? "selected" : null} ${
         play ? "play" : null
       }`}

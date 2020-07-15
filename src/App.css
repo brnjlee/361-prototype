@@ -1,28 +1,3 @@
-.target {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.target__box {
-  height: 100px;
-  max-width: 100px;
-  flex: 1;
-  min-width: 50px;
-  margin: 20px;
-  background: gray;
-  border-radius: 20px;
-}
-
-.play {
-  background: blue;
-}
-
-.selected {
-  background: black;
-  color: white;
-}
-
 .App {
   text-align: center;
   /* padding-left: 70px; */
