@@ -1,39 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Target = ({ src, pos, color, title }) => {
+const Target = ({ src, pos, color, title, notes, setNotes }) => {
   const audio = useRef(null);
-  const [boxes, setBox] = useState([
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ]);
 
   useEffect(() => {
-    if (!!boxes[pos]) {
+    if (!!notes[pos]) {
       audio.current.play();
       audio.current.currentTime = 0;
     }
   }, [pos]);
 
   const handleClick = position => {
-    let copy = boxes;
-    copy.splice(position, 1, !!boxes[position] ? 0 : 1);
-    setBox([...copy]);
+    setNotes(position);
   };
-  const loop = boxes.map((box, i) => {
+  const loop = notes.map((box, i) => {
     return (
       <TargetBox
         key={i}

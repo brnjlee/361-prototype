@@ -9,7 +9,7 @@ import {
 import { Navbar } from "./components/Navbar";
 import { Landing } from "./routes/Landing";
 import { Create } from "./routes/Create";
-import { Dashboard } from "./routes/Room";
+import { Room } from "./routes/Room";
 
 import "./App.css";
 
@@ -21,7 +21,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/create" component={Create} />
-          <Route path="/room/:id" component={Dashboard} />
+          <Route path="/room/:id" component={Room} />
         </Switch>
       </div>
     </Router>
