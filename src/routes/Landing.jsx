@@ -11,8 +11,8 @@ export const Landing = () => {
         <div className="landing__buttons">
           <Link to="/create" className="landing__button">
             Create Session
-          </Link>{" "}
-          <Link to="/dashboard" className="landing__button landing__join">
+          </Link>
+          <Link to="/room/abcdef" className="landing__button landing__join">
             Join Session
           </Link>
         </div>
