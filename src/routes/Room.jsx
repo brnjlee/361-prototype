@@ -8,12 +8,10 @@ import "./Room.css";
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
-  // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
 
-  // Set up the interval.
   useEffect(() => {
     function tick() {
       savedCallback.current();
@@ -29,6 +27,7 @@ export const Room = () => {
   const [pos, setPos] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [tempo, setTempo] = useState(100);
+  //Undo Redo state
   const [activity, setActivity] = useState({
     past: [],
     future: []

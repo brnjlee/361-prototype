@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .landing__header {
@@ -50,4 +50,12 @@
 
 .landing__join {
   background: #595d63;
+}
+
+.landing__image {
+  height: 400px;
+  -webkit-box-shadow: -1px 8px 33px 17px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 8px 33px 17px rgba(0, 0, 0, 0.25);
+  box-shadow: -1px 8px 33px 17px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
 }

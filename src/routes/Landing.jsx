@@ -17,6 +17,11 @@ export const Landing = () => {
           </Link>
         </div>
       </div>
+      <img
+        className="landing__image"
+        src="/assets/screen.png"
+        alt="landing page image"
+      />
     </div>
   );
 };
