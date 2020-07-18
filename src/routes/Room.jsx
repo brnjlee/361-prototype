@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Target from "../components/Target";
 import { GrUndo, GrRedo } from "react-icons/gr";
 import { Modal } from "../components/Modal";
+import { ExecuteGA } from "../ga/population";
 
 import "./Room.css";
 
@@ -45,7 +46,7 @@ export const Room = () => {
     } else {
       setPos(pos + 1);
     }
-  }, 60000 / tempo);
+  }, 15000 / tempo);
 
   const handleNoteChange = (column, row) => {
     let copy = notes;
@@ -80,6 +81,26 @@ export const Room = () => {
   const changeTempo = e => {
     e.preventDefault();
     setTempo(e.target.quantity.value);
+  };
+
+  const executeOrder66 = (mutationRate, generations, totalPopulation) => {
+    let target = [];
+    for (let i = 0; i < notes.length; i++) {
+      target = [...target, ...notes[i]];
+    }
+
+    const result = ExecuteGA(
+      target,
+      mutationRate,
+      generations,
+      totalPopulation
+    );
+    let newNotes = [];
+    for (let i = 0; i < result.length; i++) {
+      newNotes.push(result.splice(0, 16));
+    }
+    setNotes(newNotes);
+    setShowModal(false);
   };
 
   return (
@@ -128,7 +149,11 @@ export const Room = () => {
         changeTempo={e => changeTempo(e)}
         tempo={tempo}
       />
-      <Modal open={showModal} closeModal={() => setShowModal(false)} />
+      <Modal
+        open={showModal}
+        closeModal={() => setShowModal(false)}
+        executeOrder66={(mut, gen, pop) => executeOrder66(mut, gen, pop)}
+      />
       {showModal && <div className="overlay" />}
     </div>
   );

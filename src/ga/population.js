@@ -1,17 +1,10 @@
 import { DNA } from "./dna";
 
-export function Population() {
+export function ExecuteGA(target, mutationRate, generations, totalPopulation) {
   let population = [];
-  let mutationRate = 0.01; // Mutation rate
-  let totalPopulation = 200; // Total Population
-  let generations = 100000; // Number of Generations Between Updates
-  let target1 = [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0];
-  let target2 = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0];
-  let target3 = [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0];
   let fittest = null;
   let maxFit = 0;
 
-  let target = [...target1, ...target2, ...target3];
   for (let i = 0; i < totalPopulation; i++) {
     population[i] = new DNA(target.length);
   }

@@ -8,10 +8,13 @@
   padding: 20px;
   position: absolute;
   display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .open {
-  display: block;
+  display: flex;
 }
 
 .modal__close-button {
@@ -22,6 +25,7 @@
   border-radius: 20%;
   width: 60px;
   position: relative;
+  align-self: flex-start;
 }
 
 .modal__icon {
@@ -33,5 +37,13 @@
 }
 
 .modal__close-button:hover .modal__icon {
+  color: white;
+}
+
+.modal__options {
+  width: 90%;
+}
+
+.modal__options .MuiSlider-markLabel {
   color: white;
 }
