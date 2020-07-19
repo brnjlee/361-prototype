@@ -16,6 +16,7 @@ export const Modal = ({ open, closeModal, executeOrder66 }) => {
       <div className="modal__close-button" onClick={() => closeModal()}>
         <FiArrowLeft className="modal__icon" />
       </div>
+      <div className="create__header">Generate a unique beat</div>
       <div className="modal__options">
         <Typography id="discrete-slider" gutterBottom>
           Mutation Rate

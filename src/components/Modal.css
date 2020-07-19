@@ -47,3 +47,11 @@
 .modal__options .MuiSlider-markLabel {
   color: white;
 }
+
+.MuiTypography-body1 {
+  font-size: 17px;
+  font-weight: bold;
+  text-align: left;
+  opacity: 0.7;
+  padding-bottom: 10px;
+}
