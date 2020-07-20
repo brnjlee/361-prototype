@@ -6,7 +6,7 @@ import Slider from "@material-ui/core/Slider";
 
 import "./Modal.css";
 
-export const Modal = ({ open, closeModal, executeOrder66 }) => {
+export const GAModal = ({ open, closeModal, executeGA }) => {
   const [mutationRate, setMutationRate] = useState(0.02);
   const [generations, setGenerations] = useState(1000);
   const [population, setPopulation] = useState(200);
@@ -64,7 +64,7 @@ export const Modal = ({ open, closeModal, executeOrder66 }) => {
 
       <div
         className={`optionBar__button`}
-        onClick={() => executeOrder66(mutationRate, generations, population)}
+        onClick={() => executeGA(mutationRate, generations, population)}
       >
         Generate
       </div>

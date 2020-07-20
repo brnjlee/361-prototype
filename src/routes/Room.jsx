@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Target from "../components/Target";
 import { GrUndo, GrRedo } from "react-icons/gr";
-import { Modal } from "../components/Modal";
+import { GAModal } from "../components/GAModal";
 import { ExecuteGA } from "../ga/population";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
 
 import "./Room.css";
 
@@ -59,11 +62,16 @@ export const Room = () => {
   const handleUndo = () => {
     if (activity.past.length === 0) return;
     let activityCopy = activity;
-    const [column, row] = activityCopy.past.pop();
-    activityCopy.future.push([column, row]);
-    let copy = notes;
-    copy[row].splice(column, 1, !!copy[row][column] ? 0 : 1);
-    setNotes(copy);
+    const lastActivity = activityCopy.past.pop();
+    if (lastActivity.length > 2) {
+      setNotes(lastActivity);
+    } else {
+      const [column, row] = lastActivity;
+      activityCopy.future.push([column, row]);
+      let copy = notes;
+      copy[row].splice(column, 1, !!copy[row][column] ? 0 : 1);
+      setNotes(copy);
+    }
     setActivity(activityCopy);
   };
 
@@ -78,12 +86,11 @@ export const Room = () => {
     setActivity(activityCopy);
   };
 
-  const changeTempo = e => {
-    e.preventDefault();
-    setTempo(e.target.quantity.value);
+  const changeTempo = val => {
+    setTempo(val);
   };
 
-  const executeOrder66 = (mutationRate, generations, totalPopulation) => {
+  const executeGA = (mutationRate, generations, totalPopulation) => {
     let target = [];
     for (let i = 0; i < notes.length; i++) {
       target = [...target, ...notes[i]];
@@ -99,6 +106,7 @@ export const Room = () => {
     for (let i = 0; i < result.length; i++) {
       newNotes.push(result.splice(0, 16));
     }
+    setActivity({ past: [...activity.past, notes], future: [] });
     setNotes(newNotes);
     setShowModal(false);
   };
@@ -146,13 +154,13 @@ export const Room = () => {
         openGAModal={() => {
           setShowModal(true);
         }}
-        changeTempo={e => changeTempo(e)}
+        changeTempo={val => changeTempo(val)}
         tempo={tempo}
       />
-      <Modal
+      <GAModal
         open={showModal}
         closeModal={() => setShowModal(false)}
-        executeOrder66={(mut, gen, pop) => executeOrder66(mut, gen, pop)}
+        executeGA={(mut, gen, pop) => executeGA(mut, gen, pop)}
       />
       {showModal && <div className="overlay" />}
     </div>
@@ -174,20 +182,53 @@ const OptionBar = ({
       <div className={`optionBar__option`} onClick={() => handleRedo()}>
         <GrRedo className="optionBar__icon" />
       </div>
-      <form onSubmit={e => changeTempo(e)}>
-        <input
-          className="optionBar__input"
-          type="number"
-          id="quantity"
-          name="quantity"
-          defaultValue={tempo}
-          min="1"
-          max="300"
+      <div className="tempo-container">
+        <PrettoSlider
+          defaultValue={100}
+          getAriaValueText={val => `${val * 100}%`}
+          aria-labelledby="discrete-slider-custom"
+          valueLabelDisplay="auto"
+          step={1}
+          min={15}
+          max={300}
+          onChange={(e, val) => {
+            changeTempo(val);
+          }}
         />
-      </form>
+      </div>
       <div className={`optionBar__button`} onClick={() => openGAModal()}>
         Generate
       </div>
     </div>
   );
 };
+
+const PrettoSlider = withStyles({
+  root: {
+    color: "#475e83",
+    height: 8
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
+    marginTop: -8,
+    marginLeft: -12,
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit"
+    }
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 4px)"
+  },
+  track: {
+    height: 8,
+    borderRadius: 4
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4
+  }
+})(Slider);
