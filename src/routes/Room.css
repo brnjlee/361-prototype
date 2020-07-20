@@ -65,7 +65,7 @@
 
 .optionBar__container {
   width: 90%;
-  max-width: 620px;
+  max-width: 670px;
   height: 70px;
   position: absolute;
   background: #1e2226;
@@ -149,7 +149,7 @@
 
 .tempo-container {
   width: 100%;
-  max-width: 275px;
+  max-width: 250px;
   padding: 0 30px;
 }
 

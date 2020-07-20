@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Target from "../components/Target";
 import { GrUndo, GrRedo } from "react-icons/gr";
+import { BsPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { GAModal } from "../components/GAModal";
 import { ExecuteGA } from "../ga/population";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -29,6 +30,7 @@ function useInterval(callback, delay) {
 
 export const Room = () => {
   const [pos, setPos] = useState(0);
+  const [play, setPlay] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [tempo, setTempo] = useState(100);
   //Undo Redo state
@@ -44,15 +46,17 @@ export const Room = () => {
   ]);
 
   useInterval(() => {
-    if (pos >= 15) {
-      setPos(0);
-    } else {
-      setPos(pos + 1);
+    if (play) {
+      if (pos >= 15) {
+        setPos(0);
+      } else {
+        setPos(pos + 1);
+      }
     }
   }, 15000 / tempo);
 
   const handleNoteChange = (column, row) => {
-    let copy = notes;
+    let copy = notes.slice();
     copy[row].splice(column, 1, !!copy[row][column] ? 0 : 1);
     setNotes(copy);
     let activityCopy = activity;
@@ -68,7 +72,7 @@ export const Room = () => {
     } else {
       const [column, row] = lastActivity;
       activityCopy.future.push([column, row]);
-      let copy = notes;
+      let copy = notes.slice();
       copy[row].splice(column, 1, !!copy[row][column] ? 0 : 1);
       setNotes(copy);
     }
@@ -80,7 +84,7 @@ export const Room = () => {
     let activityCopy = activity;
     const [column, row] = activityCopy.future.pop();
     activityCopy.past.push([column, row]);
-    let copy = notes;
+    let copy = notes.slice();
     copy[row].splice(column, 1, !!copy[row][column] ? 0 : 1);
     setNotes(copy);
     setActivity(activityCopy);
@@ -156,6 +160,8 @@ export const Room = () => {
         }}
         changeTempo={val => changeTempo(val)}
         tempo={tempo}
+        play={play}
+        setPlay={() => setPlay(!play)}
       />
       <GAModal
         open={showModal}
@@ -172,7 +178,9 @@ const OptionBar = ({
   handleRedo,
   openGAModal,
   changeTempo,
-  tempo
+  tempo,
+  play,
+  setPlay
 }) => {
   return (
     <div className="optionBar__container">
@@ -181,6 +189,13 @@ const OptionBar = ({
       </div>
       <div className={`optionBar__option`} onClick={() => handleRedo()}>
         <GrRedo className="optionBar__icon" />
+      </div>
+      <div className={`optionBar__option`} onClick={() => setPlay()}>
+        {play ? (
+          <BsFillPauseFill className="optionBar__icon" />
+        ) : (
+          <BsPlayFill className="optionBar__icon" />
+        )}
       </div>
       <div className="tempo-container">
         <PrettoSlider
