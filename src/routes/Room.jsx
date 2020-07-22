@@ -118,6 +118,22 @@ export const Room = () => {
   return (
     <div className="room__container">
       <div className="room__header">Click the keys to make a beat</div>
+      <div className="room__online">
+        <div
+          className="avatar__icon letter__icon"
+          style={{ backgroundColor: "#c88900" }}
+        >
+          A
+        </div>
+        <img className="avatar__icon" src="/assets/victor.jpg" alt="avatar" />
+        <div
+          className="avatar__icon letter__icon"
+          style={{ backgroundColor: "#42a5f5" }}
+        >
+          K
+        </div>
+        <img className="avatar__icon" src="/assets/jordan.jpg" alt="avatar" />
+      </div>
       <div className="targets">
         <Target
           src={"https://www.myinstants.com/media/sounds/snare.mp3"}
