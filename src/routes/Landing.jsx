@@ -9,7 +9,7 @@ export const Landing = () => {
         <span className="landing__title">TuneLab</span>
         <span className="landing__description">Create. Collaborate</span>
         <div className="landing__buttons">
-          <Link to="/create" className="landing__button">
+          <Link to="/room/abcdef" className="landing__button">
             Create Session
           </Link>
           <Link to="/room/abcdef" className="landing__button landing__join">

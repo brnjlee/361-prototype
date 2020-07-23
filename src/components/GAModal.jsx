@@ -8,7 +8,7 @@ import "./Modal.css";
 
 export const GAModal = ({ open, closeModal, executeGA }) => {
   const [mutationRate, setMutationRate] = useState(0.02);
-  const [generations, setGenerations] = useState(1000);
+  const [generations, setGenerations] = useState(500);
   const [population, setPopulation] = useState(200);
 
   return (
@@ -43,7 +43,7 @@ export const GAModal = ({ open, closeModal, executeGA }) => {
           step={100}
           marks={generationMarks}
           min={100}
-          max={10000}
+          max={1000}
           onChange={(e, val) => setGenerations(val)}
         />
         <Typography id="discrete-slider" gutterBottom>
@@ -57,7 +57,7 @@ export const GAModal = ({ open, closeModal, executeGA }) => {
           step={50}
           marks={populationMarks}
           min={50}
-          max={1000}
+          max={500}
           onChange={(e, val) => setPopulation(val)}
         />
       </div>
@@ -118,8 +118,8 @@ const generationMarks = [
     label: "100"
   },
   {
-    value: 10000,
-    label: "10000"
+    value: 1000,
+    label: "1000"
   }
 ];
 const populationMarks = [
@@ -128,7 +128,7 @@ const populationMarks = [
     label: "50"
   },
   {
-    value: 1000,
-    label: "1000"
+    value: 500,
+    label: "500"
   }
 ];

@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Target from "../components/Target";
 import { GrUndo, GrRedo } from "react-icons/gr";
 import { BsPlayFill, BsFillPauseFill } from "react-icons/bs";
+import { FiCopy } from "react-icons/fi";
 import { GAModal } from "../components/GAModal";
 import { ExecuteGA } from "../ga/population";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Slider from "@material-ui/core/Slider";
 
 import "./Room.css";
@@ -117,6 +119,17 @@ export const Room = () => {
 
   return (
     <div className="room__container">
+      <div className="room__share">
+        <label>Room code: </label>
+        <span> abcdef</span>
+        <CopyToClipboard
+          text={"abcdef"}
+          // onCopy={() => )}
+          className="room__copy"
+        >
+          <FiCopy className="copy__icon" />
+        </CopyToClipboard>
+      </div>
       <div className="room__header">Click the keys to make a beat</div>
       <div className="room__online">
         <div
